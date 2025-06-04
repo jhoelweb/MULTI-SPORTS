@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Políticas y Condiciones | Multisport</title>
+  <style>
+    /* Fondo animado con gradiente */
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-150deg, #202020, #eeea13, #111111, #0f0f0f);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    /* Menú de navegación */
+    .navbar {
+      background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+      color: white;
+      padding: 10px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .navbar img {
+      height: 90px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 4px #e4f875);
+      transition: transform 0.3s ease;
+    }
+         .navbar img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px #e4f875);}
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff6a00;
+    }
+
+    /* Contenedor principal */
+    .container {
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 15px;
+      max-width: 800px;
+      padding: 30px 40px;
+      box-shadow: 0 0 20px rgba(14, 13, 13, 0.15);
+      overflow: hidden;
+      position: relative;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #d5f80c, #e52e71);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: textGlow 3s ease-in-out infinite alternate;
+      letter-spacing: 1.5px;
+    }
+
+    @keyframes textGlow {
+      0% {
+        filter: drop-shadow(0 0 5px #ff8a00);
+      }
+      100% {
+        filter: drop-shadow(0 0 20px #e52e71);
+      }
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #ffce00;
+      text-shadow: 1px 1px 5px #000;
+      position: relative;
+      animation: slideInLeft 1s ease forwards;
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      color: #ddd;
+      animation: fadeInText 1.5s ease forwards;
+      opacity: 0;
+      animation-delay: 1.3s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(45deg, #27cc71, #98d606);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 138, 0, 0.6);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      animation: pulse 3s infinite;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      left: -75%;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: skewX(-25deg);
+      transition: all 0.5s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 150%;
+    }
+
+    .btn:hover {
+      box-shadow: 0 6px 20px rgba(255, 0, 128, 0.8);
+      transform: scale(1.05);
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 138, 0, 0.6);
+      }
+      50% {
+        box-shadow: 0 8px 25px rgba(255, 138, 0, 1);
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    footer {
+      background: linear-gradient(90deg, #0d1117 0%, #161b22 100%);
+      color: #bbb;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+.logo {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 0 6px #ffea00);
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter: drop-shadow(0 0 15px #fff266);
+    }
+
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: brightness(0) invert(1);
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      filter: none;
+    }
+
+    .divider {
+      border-top: 1px solid #d4c851;
+      margin: 20px auto;
+      width: 90%;
+      opacity: 0.6;
+    }
+
+    .legal {
+      font-size: 13px;
+      margin-top: 10px;
+      color: #b5ad48;
+      font-style: italic;
+      user-select: none;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px 25px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+      }
+      .btn {
+        padding: 10px 22px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menú -->
+  <div class="navbar">
+    <a href="Menu.html"><img src="imgs/multisp.png" alt="Logo" /></a>
+    <nav>
+      <a href="#privacy">Privacidad</a>
+      <a href="#terms">Condiciones</a>
+    </nav>
+  </div>
+
+  <!-- Contenido Principal -->
+  <div class="container">
+    <h1>Políticas y Condiciones</h1>
+
+    <section id="privacy">
+      <h2>Política de Privacidad</h2>
+      <p>
+        Nos comprometemos a proteger su privacidad y garantizar que su información personal esté segura. Recopilamos datos únicamente para mejorar su experiencia y cumplir con los requisitos legales.
+      </p>
+      <p>
+        Nunca compartiremos su información con terceros sin su consentimiento explícito, excepto en casos legales o de seguridad.
+      </p>
+      <p>
+        Usted tiene derecho a acceder, corregir o eliminar sus datos en cualquier momento contactándonos.
+      </p>
+    </section>
+
+    <section id="terms">
+      <h2>Condiciones de Uso</h2>
+      <p>
+        Al utilizar este sitio, usted acepta cumplir con nuestras condiciones de uso, que incluyen respetar los derechos de propiedad intelectual y no utilizar el contenido de manera indebida.
+      </p>
+      <p>
+        Nos reservamos el derecho a modificar estas condiciones en cualquier momento, y es responsabilidad del usuario revisarlas periódicamente.
+      </p>
+      <p>
+        El uso continuado del sitio implica la aceptación de cualquier cambio.
+      </p>
+    </section>
+
+    <button class="btn" onclick="alert('Gracias por aceptar nuestras políticas!')">Aceptar</button>
+  </div>
+
+  <!-- Footer -->
+<footer>
+    <img src="imgs/multisp.png" alt="Tu Logo" class="logo" />
+    <div class="social-icons">
+      <a href="#"><img src="imgs/Instagram.webp" alt="Instagram" /></a>
+      <a href="#"><img src="imgs/face.webp" alt="Facebook" /></a>
+      <a href="#"><img src="imgs/WhatsApp.svg.webp" alt="WhatsApp" /></a>
+    </div>
+    <div class="divider"></div>
+    <div class="legal">
+      © 2025 MultiSport | Todos los derechos reservados | Dirección:Zacatecoluca, El salvador | NIT: 0000-000000-000-0
+    </div>
+
+
+</body>
+</html>

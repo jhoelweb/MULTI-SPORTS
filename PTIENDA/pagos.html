@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Formulario de Pago</title>
+
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(to right, #000000, #1f1f1f);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    form {
+      background: #2c2c2c;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 128, 0.4);
+      width: 100%;
+      max-width: 450px;
+      animation: slideIn 1s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 25px;
+      border: none;
+      border-radius: 8px;
+      background-color: #444;
+      color: white;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      background-color: #555;
+      outline: none;
+    }
+
+    button {
+      background: #00e676;
+      border: none;
+      color: black;
+      font-weight: bold;
+      padding: 12px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #00c853;
+    }
+
+    .form-group {
+      animation: fadeInUp 0.6s ease forwards;
+      opacity: 0;
+    }
+
+    .form-group:nth-child(1) { animation-delay: 0.1s; }
+    .form-group:nth-child(2) { animation-delay: 0.2s; }
+    .form-group:nth-child(3) { animation-delay: 0.3s; }
+    .form-group:nth-child(4) { animation-delay: 0.4s; }
+    .form-group:nth-child(5) { animation-delay: 0.5s; }
+    .form-group:nth-child(6) { animation-delay: 0.6s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <form id="paymentForm">
+    <h1>Formulario de Pago</h1>
+
+    <div class="form-group">
+      <label for="name">Nombre en la tarjeta</label>
+      <input type="text" id="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="card">Número de tarjeta</label>
+      <input type="text" id="card" maxlength="16" required>
+    </div>
+
+    <div class="form-group">
+      <label for="exp">Fecha de vencimiento</label>
+      <input type="month" id="exp" required>
+    </div>
+
+    <div class="form-group">
+      <label for="cvv">CVV</label>
+      <input type="text" id="cvv" maxlength="4" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Teléfono</label>
+      <input type="tel" id="phone" maxlength="15" required>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Dirección de envío</label>
+      <textarea id="address" rows="3" required></textarea>
+    </div>
+
+    <button type="submit">Pagar ahora</button>
+  </form>
+
+  <script>
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const card = document.getElementById('card').value.trim();
+      const exp = document.getElementById('exp').value.trim();
+      const cvv = document.getElementById('cvv').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+
+      if (!name || !card || !exp || !cvv || !phone || !address) {
+        Swal.fire({
+          title: "Error",
+          text: "Por favor completa todos los campos.",
+          icon: "error",
+          confirmButtonText: "Aceptar"
+        });
+        return;
+      }
+
+      if (!/^\d{16}$/.test(card)) {
+        Swal.fire({
+          title: "Error",
+          text: "El número de tarjeta debe tener 16 dígitos.",
+          icon: "error"
+        });
+        return;
+      }
+
+      if (!/^\d{3,4}$/.test(cvv)) {
+        Swal.fire({
+          title: "Error",
+          text: "El CVV debe tener 3 o 4 dígitos.",
+          icon: "error"
+        });
+        return;
+      }
+
+      if (!/^\d{8,15}$/.test(phone)) {
+        Swal.fire({
+          title: "Error",
+          text: "El número de teléfono debe tener entre 8 y 15 dígitos.",
+          icon: "error"
+        });
+        return;
+      }
+
+ Swal.fire({
+  title: "¡Pago procesado!",
+  html: `
+    <b>${name}</b><br>
+    Tu pago ha sido realizado con éxito.<br><br>
+    Tu pedido será enviado a la dirección:<br><i>${address}</i><br><br>
+    <b>Teléfono:</b> ${phone}
+  `,
+  icon: "success",
+  confirmButtonText: "Aceptar"
+}).then(() => {
+  // Redireccionar al menú principal (ajusta la ruta si es diferente)
+  window.location.href="tiendas.html";
+});
+      this.reset();
+    });
+  </script>
+</body>
+</html>

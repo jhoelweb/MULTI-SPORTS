@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MultiSport</title>
+  <style>
+    /* BODY Y FONDO */
+    body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, hsl(340, 5%, 5%), hsl(240, 1%, 42%));
+      color: white;
+      overflow-x: hidden;
+      transition: filter 0.5s ease;
+    }
+
+    /* BOTÓN MENU */
+    .menu-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 30px;
+      cursor: pointer;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .menu-btn div {
+      width: 100%;
+      height: 4px;
+      background: #d4c851; /* amarillo suave */
+      border-radius: 3px;
+      transition: 0.4s;
+      box-shadow: none; /* sin neón */
+    }
+
+    .menu-btn.active .bar1 {
+      transform: rotate(-45deg) translate(-7px, 6px);
+    }
+
+    .menu-btn.active .bar2 {
+      opacity: 0;
+    }
+
+    .menu-btn.active .bar3 {
+      transform: rotate(45deg) translate(-7px, -6px);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(15px);
+      box-shadow: none; /* sin sombra neón */
+      padding: 80px 30px 30px 30px;
+      transition: left 0.5s ease;
+      z-index: 1050;
+      border-right: 2px solid #d4c851; /* borde amarillo suave */
+      border-radius: 0 12px 12px 0;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      margin: 25px 0;
+      color: white; /* texto amarillo suave */
+      font-size: 1.3em;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateX(-40px);
+      animation: slideIn 0.45s forwards;
+      position: relative;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-shadow: none; /* sin sombra */
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Delays para animación de entrada */
+    .sidebar.active a:nth-child(1) { animation-delay: 0.2s; }
+    .sidebar.active a:nth-child(2) { animation-delay: 0.35s; }
+    .sidebar.active a:nth-child(3) { animation-delay: 0.5s; }
+    .sidebar.active a:nth-child(4) { animation-delay: 0.65s; }
+    .sidebar.active a:nth-child(5) { animation-delay: 0.8s; }
+    .sidebar.active a:nth-child(6) { animation-delay: 0.95s; }
+
+    .sidebar a::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 3px;
+      left: 0;
+      bottom: -6px;
+      background: #d4c851; /* línea de hover en amarillo suave */
+      transition: width 0.4s ease;
+      border-radius: 3px;
+    }
+
+    .sidebar a:hover::after {
+      width: 100%;
+    }
+
+    .sidebar a:hover {
+      color: white; /* un poco más oscuro en hover */
+      transform: translateX(8px);
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 120px 40px 60px 40px;
+      text-align: center;
+      transition: filter 0.5s ease;
+    }
+
+    body.menu-open main {
+      filter: blur(3px) brightness(0.6);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .content h1 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #d5f80c, #e52e71);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: textGlow 3s ease-in-out infinite alternate;
+      letter-spacing: 1.5px;
+    }
+
+    .content p {
+      font-size: 1.3em;
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      opacity: 0.8;
+      color: #b5ad48;
+      animation: fadeInUp 1.4s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* LOGO */
+    .logi {
+      margin: 0 auto 50px auto;
+      max-width: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      animation: logoSpinIn 1.3s ease-out forwards;
+      animation-delay: 1s;
+    }
+
+    .logi img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+
+    @keyframes logoSpinIn {
+      0% {
+        transform: scale(0.3) rotate(-180deg);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.1) rotate(15deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(90deg, #0d1117 0%, #161b22 100%);
+      color: #bbb;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 160px;
+      height: auto;
+      filter: none; /* sin sombra */
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter: none; /* sin sombra */
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: brightness(0) invert(1); /* blanco para resaltar en fondo negro */
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      filter: none; /* sin brillo */
+    }
+
+    .divider {
+      border-top: 1px solid #d4c851;
+      margin: 20px auto;
+      width: 90%;
+      opacity: 0.6;
+    }
+
+    .legal {
+      font-size: 13px;
+      margin-top: 10px;
+      color: #b5ad48;
+      font-style: italic;
+      user-select: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      main {
+        padding: 100px 20px 60px 20px;
+      }
+
+      .content h1 {
+        font-size: 2.4em;
+      }
+
+      .content p {
+        font-size: 1.1em;
+      }
+
+      .logi {
+        max-width: 260px;
+        margin-bottom: 40px;
+      }
+
+      .menu-btn {
+        width: 35px;
+        height: 28px;
+      }
+
+      .menu-btn div {
+        height: 3px;
+      }
+
+      .sidebar {
+        width: 100%;
+        left: -100%;
+        padding-top: 100px;
+        border-radius: 0;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content h1 {
+        font-size: 2em;
+      }
+
+      .sidebar a {
+        font-size: 1.1em;
+      }
+
+      .social-icons img {
+        width: 28px;
+        margin: 0 8px;
+      }
+
+      footer {
+        padding: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+  </div>
+
+  <nav class="sidebar" id="sidebar" aria-label="Menú principal">
+    <a href="tiendas.html">Productos</a>
+    <a href="sobreNosotros.html">Sobre Nosotros</a>
+    <a href="contacto.html">Contacto</a>
+    <a href="galeria.html">Galería</a>
+    <a href="comentarios.html">Comentarios</a>
+    <a href="politica.html">Política y Privacidad</a>
+  </nav>
+
+  <main>
+    <div class="content" id="mainContent">
+      <h1>¡Bienvenido!</h1>
+      <div class="logi" aria-label="Logo de MultiSport">
+        <img src="imgs/multisp.png" alt="Logo MultiSport" />
+      </div>
+      <h1>Donde empieza tu Victoria.</h1>
+      <p>Explora nuestros productos y descubre la mejor calidad en equipamiento deportivo.</p>
+    </div>
+  </main>
+
+  <footer>
+    <img src="imgs/multisp.png" alt="Logo MultiSport" class="logo" />
+    <div class="social-icons">
+      <a href="https://www.instagram.com/"><img src="imgs/Instagram.webp" alt="Instagram" /></a>
+      <a href="https://www.facebook.com/"><img src="imgs/face.webp" alt="Facebook" /></a>
+      <a href="https://web.whatsapp.com/"><img src="imgs/WhatsApp.svg.webp" alt="WhatsApp" /></a>
+    </div>
+    <div class="divider"></div>
+    <div class="legal">
+      © 2025 MultiSport | Todos los derechos reservados | Dirección: Zacatecoluca, El Salvador | NIT: 0000-000000-000-0
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menuBtn = document.getElementById('menuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const body = document.body;
+
+      menuBtn.classList.toggle('active');
+      sidebar.classList.toggle('active');
+      body.classList.toggle('menu-open');
+    }
+  </script>
+</body>
+</html>

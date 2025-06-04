@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre Nosotros - MultiSport</title>
+  <style>
+    body {
+      background-color: black;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .navbar {
+      background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .navbar:hover {
+      background: linear-gradient(90deg, #1f2937, #4b5563);
+    }
+    .navbar img {
+      height: 80px;
+      cursor: pointer;
+    }
+    .navbar h1 {
+      margin-left: 10px;
+      font-size: 1.5em;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown > button {
+      background: none;
+      border: none;
+      color: black;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      color: black;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      z-index: 10;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+    }
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .content {
+      padding: 40px 20px;
+      color: white;
+      text-align: left;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    /* Estilos para el carrusel */
+    .carousel {
+      position: relative;
+      max-width: 450px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 30px 15px rgba(255,255,255,0.3);
+      margin-bottom: 20px;
+    }
+
+    .carousel-inner {
+      position: relative;
+      width: 100%;
+      height: 300px;
+    }
+
+    .carousel-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      border-radius: 10px;
+    }
+
+    .carousel-image.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.5);
+      border: none;
+      font-size: 2em;
+      padding: 0 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      color: black;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-control:hover {
+      background: rgba(255,255,255,0.8);
+    }
+
+    .carousel-control.prev {
+      left: 10px;
+    }
+
+    .carousel-control.next {
+      right: 10px;
+    }
+
+    .content div {
+      max-width: 450px;
+    }
+    .content h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .content p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
+    }
+ footer {
+      background: linear-gradient(90deg, #0d1117 0%, #161b22 100%);
+      color: #bbb;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 160px;
+      height: auto;
+      filter: none; /* sin sombra */
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter: none; /* sin sombra */
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: brightness(0) invert(1); /* blanco para resaltar en fondo negro */
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      filter: none; /* sin brillo */
+    }
+
+    .divider {
+      border-top: 1px solid #d4c851;
+      margin: 20px auto;
+      width: 90%;
+      opacity: 0.6;
+    }
+
+    .legal {
+      font-size: 13px;
+      margin-top: 10px;
+      color: #b5ad48;
+      font-style: italic;
+      user-select: none;
+    }
+
+    /* Animación para las secciones de misión y visión */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+    .fade-in-up.delay-1 {
+      animation-delay: 0.5s;
+    }
+    .fade-in-up.delay-2 {
+      animation-delay: 1s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="Menu.html"><img src="imgs/multisp.png" alt="Logo" /></a>
+    <div class="dropdown">
+      <button>Marcas ▼</button>
+      <div class="dropdown-content">
+        <a href="nike.html"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike" style="height:24px; width:auto; margin-right:8px;" />Nike</a>
+        <a href="Jordan.html"><img src="imgs/air-jordan-logo.png" alt="Jordan" style="height:50px; margin-right:8px;" />Jordan</a>
+        <a href="#"><img src="imgs/adidas.svg" alt="Adidas" style="height:50px; margin-right:8px;" />Adidas</a>
+        <a href="#"><img src="imgs/Under_armour_logo.svg" alt="Under Armour" style="height:50px;" /></a>
+        <a href="#"><img src="imgs/fila.svg" alt="Fila" style="height:50px; margin-right:8px;" /></a>
+        <a href="#"><img src="imgs/new-balance-2-logo-black-and-white.png" alt="New Balance" style="height:80px; margin-right:8px;" /></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOBRE NOSOTROS -->
+  <div class="content">
+    <!-- Carrusel -->
+    <div class="carousel fade-in-up delay-1">
+      <div class="carousel-inner">
+        <img src="imgs/coleccion-ropa-deportiva-moda-exhibida-tienda-deportes_1077802-363570.avif" alt="Jugadores de fútbol celebrando" class="carousel-image active" />
+        <img src="imgs/tiendas-deportes-oaxaca.jpg" alt="Equipo entrenando" class="carousel-image" />
+        <img src="imgs/fuchibol.jpg" alt="Partido de fútbol" class="carousel-image" />
+      </div>
+      <button class="carousel-control prev" aria-label="Anterior">&#10094;</button>
+      <button class="carousel-control next" aria-label="Siguiente">&#10095;</button>
+    </div>
+
+    <div>
+      <h2 class="fade-in-up delay-1">Misión</h2>
+      <p class="fade-in-up delay-1">
+        Nuestra misión es brindar productos deportivos de calidad que inspiren y potencien el rendimiento de nuestros clientes, fomentando un estilo de vida saludable y activo.
+      </p>
+      <h2 class="fade-in-up delay-2">Visión</h2>
+      <p class="fade-in-up delay-2">
+        Ser la tienda líder en deportes a nivel regional, reconocida por nuestra excelencia, innovación y compromiso con la comunidad deportiva.
+      </p>
+    </div>
+  </div>
+
+  <!-- PIE DE PÁGINA -->
+  <footer>
+    <img src="imgs/multisp.png" alt="Tu Logo" class="logo" />
+    <div class="social-icons">
+      <a href="#"><img src="imgs/Instagram.webp" alt="Instagram" /></a>
+      <a href="#"><img src="imgs/face.webp" alt="Facebook" /></a>
+      <a href="#"><img src="imgs/WhatsApp.svg.webp" alt="WhatsApp" /></a>
+    </div>
+    <div class="divider"></div>
+    <div class="legal">
+      © 2025 MultiSport | Todos los derechos reservados | Dirección: Zacatecoluca, El Salvador | NIT: 0000-000000-000-0
+    </div>
+  </footer>
+
+  <script>
+    const images = document.querySelectorAll('.carousel-image');
+    const prevBtn = document.querySelector('.carousel-control.prev');
+    const nextBtn = document.querySelector('.carousel-control.next');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    // Cambiar imagen automáticamente cada 5 segundos
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }, 5000);
+  </script>
+</body>
+</html>

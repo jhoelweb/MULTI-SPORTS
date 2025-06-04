@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog de nuestra tienda deportiva </title>
+  <style>
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    .navbar {
+      background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+      color: white;
+      padding: 10px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+
+    .navbar:hover {
+      background: linear-gradient(90deg, #1f2937, #4b5563);
+    }
+
+    .navbar img {
+      height: 90px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 4px #4CAF50);
+      transition: transform 0.3s ease;
+    }
+
+    .navbar img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px #4CAF50);
+    }
+
+
+    header {
+      background: url('imagenes/banner.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+
+    header h1, header h3 {
+      position: relative;
+      z-index: 3;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    article {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    article:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    article img.main-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    .content {
+      padding: 1rem;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #111;
+    }
+
+    .date {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 0.5rem;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #007bff;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border: none;
+    }
+
+    .button:hover {
+      background: #0056b3;
+    }
+
+    .gallery {
+      display: none;
+      padding: 1rem;
+      border-top: 1px solid #ccc;
+      
+    }
+
+    .gallery img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+    }
+
+ footer {
+      background: linear-gradient(90deg, #0d1117 0%, #161b22 100%);
+      color: #bbb;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 160px;
+      height: auto;
+      filter: none; /* sin sombra */
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter: none; /* sin sombra */
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: brightness(0) invert(1); /* blanco para resaltar en fondo negro */
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      filter: none; /* sin brillo */
+    }
+
+    .divider {
+      border-top: 1px solid #d4c851;
+      margin: 20px auto;
+      width: 90%;
+      opacity: 0.6;
+    }
+
+    .legal {
+      font-size: 13px;
+      margin-top: 10px;
+      color: #b5ad48;
+      font-style: italic;
+      user-select: none;
+    }
+
+
+#feedback {
+  max-width: 800px;
+  margin: 3rem auto;
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#feedback h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  max-width: 550px;
+  margin: 1rem auto;
+  border-radius: 10px;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  animation: scrollCarousel 10s linear infinite;
+}
+
+.carousel-img {
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@keyframes scrollCarousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-300%); } /* 3 imágenes hacia la izquierda */
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="navbar">
+    <a href="Menu.html" aria-label="Volver al menú principal"><img src="imgs/multisp.png" alt="Logo MultiSport" /></a>
+  </div>
+
+  <header>
+    <h1>Blog de nuestra Tienda Deportiva</h1>
+   <h3>Últimas novedades y productos destacados </h3> 
+  </header>
+
+  <main id="blog-posts"></main>
+
+  <hr>
+
+  <center style="font-size: 30px; color: black;" > Nuestra area de comentarios☺☺</center>
+
+<div id="blog-posts"></div>
+<section id="feedback">
+  <h2>¿Qué opinas de nuestra tienda?</h2>
+
+   <center>
+  <div class="rating" id="global-rating">
+    <p>  Califica nuestra tienda:</p>
+    <span class="star" onclick="setGlobalRating(1)" id="gstar-1">&#9734;</span>
+    <span class="star" onclick="setGlobalRating(2)" id="gstar-2">&#9734;</span>
+    <span class="star" onclick="setGlobalRating(3)" id="gstar-3">&#9734;</span>
+    <span class="star" onclick="setGlobalRating(4)" id="gstar-4">&#9734;</span>
+    <span class="star" onclick="setGlobalRating(5)" id="gstar-5">&#9734;</span>
+  </div></center>
+
+  <div class="comments">
+    <h4>Comentarios generales:</h4>
+    <div id="global-comments-list"></div>
+    <textarea id="global-comment-text" rows="3" placeholder="Escribe tu comentario..."></textarea>
+    <button class="button" onclick="addGlobalComment()">Enviar</button>
+    <p id="feedback-message" style="display: none; color: green; margin-top: 10px;">
+  ¡Gracias por tu calificación y comentario!
+</p>
+
+  </div>
+</section>
+
+
+
+
+
+  
+
+  <script>
+    const posts = [
+      {
+        titulo: "Zapatillas deportivas 2025",
+        fecha: "4 de junio 2025",
+        imagen: "imgs/zapatilla1.jpg",
+        contenido: "Zapatillas con suela ligera, excelente para correr.",
+        galeria: ["imgs/zapatillas2.jpg", "imgs/zapatillas3.jpg"]
+      },
+      {
+        titulo: "Ropa deportiva funcional",
+        fecha: "4 de junio 2025",
+        imagen: "imgs/ropadepeortiva1.jpg",
+        contenido: "Ideal para entrenamiento funcional de alta intensidad.",
+        galeria: ["imgs/ropadeportiva3.jpg", "imgs/ropadeportiva2.jpg"]
+      },
+      {
+        titulo: "Mochilas deportivas impermeables",
+        fecha: "4 de junio 2025",
+        imagen: "imgs/mochila.jpg",
+        contenido: "Perfectas para gimnasio o actividades al aire libre.",
+        galeria: ["imgs/mochila3.jpg", "imgs/mochila2.jpg"]
+      },
+      {
+        titulo: "Guantes deportivos pro",
+        fecha: "4 de junio 2025",
+        imagen: "imgs/guantes1.png",
+        contenido: "Diseño ergonómico con acolchado para proteger tus manos.",
+        galeria: ["imgs/guantes2.jpg", "imgs/guantes3.jpg"]
+      },
+      {
+        titulo: "pelotas deportivas originales",
+        fecha: "4 de junio 2025",
+        imagen: "imgs/pelota.jpg",
+        contenido: "pelotas de alta calidad, ideales para actividades deportivas.",
+        galeria: ["imgs/basque.jpg", "imgs/pelota3.jpg",]
+      },
+    ];
+
+    const contenedor = document.getElementById("blog-posts");
+
+    posts.forEach((post, index) => {
+      const article = document.createElement("article");
+      article.innerHTML = `
+        <img class="main-img" src="${post.imagen}" alt="${post.titulo}">
+        <div class="content">
+          <h2>${post.titulo}</h2>
+          <div class="date">${post.fecha}</div>
+          <p>${post.contenido}</p>
+          <button class="button" onclick="toggleGallery(${index})">Ver más</button>
+          
+          <div class="carousel-container" id="gallery-${index}" style"display:none,">
+  <div class="carousel-track" id="track-${index}">
+    ${post.galeria.map(img => `<img src="${img}" class="carousel-img" alt="Relacionado">`).join("")}
+  </div>
+</div>
+
+</div>
+
+
+        </div>
+      `;
+      contenedor.appendChild(article);
+    });
+function toggleGallery(index) {
+  const gallery = document.getElementById(`gallery-${index}`);
+  if (gallery) {
+    gallery.style.display = gallery.style.display === "none" ? "block" : "none";
+  }
+}
+
+
+   function addGlobalComment() {
+  const textarea = document.getElementById("global-comment-text");
+  const commentList = document.getElementById("global-comments-list");
+  const message = document.getElementById("feedback-message");
+
+  if (textarea.value.trim()) {
+    const p = document.createElement("p");
+    p.textContent = textarea.value.trim();
+    commentList.appendChild(p);
+    textarea.value = "";
+
+    // Mostrar mensaje de agradecimiento
+    message.style.display = "block";
+
+    // Ocultar mensaje después de 3 segundos (opcional)
+    setTimeout(() => {
+      message.style.display = "none";
+    }, 3000);
+  }
+}
+
+
+
+function setGlobalRating(rating) {
+  for (let i = 1; i <= 5; i++) {
+    const star = document.getElementById(`gstar-${i}`);
+    star.innerHTML = i <= rating ? "&#9733;" : "&#9734;";
+  }
+}
+
+
+  </script>
+
+
+
+<footer>
+    <img src="imgs/multisp.png" alt="Logo MultiSport" class="logo" />
+    <div class="social-icons">
+      <a href="#"><img src="imgs/Instagram.webp" alt="Instagram" /></a>
+      <a href="#"><img src="imgs/face.webp" alt="Facebook" /></a>
+      <a href="#"><img src="imgs/WhatsApp.svg.webp" alt="WhatsApp" /></a>
+    </div>
+    <div class="divider"></div>
+    <div class="legal">
+      © 2025 MultiSport | Todos los derechos reservados | Dirección: Zacatecoluca, El Salvador | NIT: 0000-000000-000-0
+    </div>
+  </footer>
+
+
+</body>
+</html>

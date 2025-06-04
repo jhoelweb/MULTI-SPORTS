@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sobre Nosotros - MultiSport</title>
+  <style>
+    /* Estilos generales */
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .navbar:hover {
+      background: linear-gradient(90deg, #1f2937, #4b5563);
+    }
+
+    
+    .navbar img {
+      height: 90px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 4px #e4f875);
+      transition: transform 0.3s ease;
+    }
+         .navbar img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px #e4f875);
+    }
+
+    .navbar h1 {
+      margin-left: 10px;
+      font-size: 1.5em;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown > button {
+      background: none;
+      border: none;
+      color: black;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      color: black;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      z-index: 10;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+    }
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* Contenido Sobre Nosotros */
+    .container {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .container h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #2e86de;
+    }
+
+    .container p {
+      line-height: 1.7;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    /* Footer */
+   footer {
+      background: linear-gradient(90deg, #0d1117 0%, #161b22 100%);
+      color: #bbb;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 0 6px #ffea00);
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter: drop-shadow(0 0 15px #fff266);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: brightness(0) invert(1); /* blanco para resaltar en fondo negro */
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      filter: drop-shadow(0 0 8px #ffea00);
+    }
+
+    .divider {
+      border-top: 1px solid #ffea00;
+      margin: 20px auto;
+      width: 90%;
+      opacity: 0.6;
+    }
+
+    .legal {
+      font-size: 13px;
+      margin-top: 10px;
+      color: #999900;
+      font-style: italic;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <a href="Menu.html"><img src="imgs/multisp.png" alt="Logo" /></a>
+  </div>
+  <style>
+
+            div {
+                overflow: hidden;
+                margin: 5px;
+                
+            }
+
+            img {
+                transition: 0.5s;
+                object-fit: cover;
+                align-items: center;
+            }
+
+            img:hover {
+                transform: scale(1.2);
+            }
+  </style>
+  
+  <div><center>
+  <img src="imgs/balonjordan.png" alt="" width="20%px" height="20%">
+  <img src="imgs/calcetines.png" alt="" width="25%x" height="25%">
+  <img src="imgs/guantes.png" alt="" width="25%px" height="25%">
+  <img src="imgs/pelotas.png" alt="" width="20%px" height="20%">
+  </div></center>
+<hr class="division">
+<style>
+  .division {
+    border: none;
+    height: 3px;
+    background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+    margin: 20px;
+  }
+</style>
+  <section>
+  <img src="imgs/barcas.png" alt="">
+  <img src="imgs/ingla.png" alt="">
+  <img src="imgs/czion.png" alt="">
+  <img src="imgs/realm.png" alt="">
+  <img src="imgs/arg.png" alt="">
+  <img src="imgs/cluka.png" alt="">
+  <img src="imgs/GWS.png" alt="">
+</section>
+  <style>
+    section {
+      display: flex;
+      width: 500;
+      height: 430;
+    }
+
+    section img {
+      width: 0px;
+      flex-grow: 1;
+      object-fit: cover;
+      opacity: .8;
+      transition: .5s ease;
+    }
+
+    section img:hover {
+      cursor: crosshair;
+      width: 300px;
+      opacity: 1;
+      filter: contrast(120%);
+    }
+  </style>
+</div>
+<hr class="division">
+<style>
+  .division {
+    border: none;
+    height: 3px;
+    background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+    margin: 20px;
+  }
+</style>
+<div class="contenido">
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <img src="imgs/runins.png" alt="Imagen 1">
+      <img src="imgs/sambas.png" alt="Imagen 2">
+      <img src="imgs/retro.png" alt="Imagen 3">
+      <img src="imgs/tacos.avif" alt="Imagen 4">
+      <img src="imgs/tatum.png" alt="Imagen 5">
+      <img src="imgs/zapatoair.png" alt="Imagen 6">
+      <img src="imgs/zapators.png" alt="Imagen 7">
+      <img src="imgs/zion.png" alt="Imagen 8">
+      <img src="imgs/air12j.png" alt="Imagen 9">
+    </div>
+  </div>
+
+  <div id="video-container"></div>
+</div>
+
+<style>
+  .contenido {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .carousel-container {
+    width: 400px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  .carousel-track {
+    display: flex;
+    width: calc(400px * 9);
+    animation: scroll 16s linear infinite;
+  }
+
+  .carousel-track img {
+    width: 400px;
+    height: 350px;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+
+  .carousel-track img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+  }
+
+  @keyframes scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-3600px); }
+  }
+
+  #video-container {
+    width: 400px;
+    height: 350px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  #video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+  }
+</style>
+
+<script>
+  const track = document.querySelector('.carousel-track');
+  track.addEventListener('mouseenter', () => {
+    track.style.animationPlayState = 'paused';
+  });
+  track.addEventListener('mouseleave', () => {
+    track.style.animationPlayState = 'running';
+  });
+
+  // Función para insertar un video de YouTube en el contenedor
+  function insertarVideoYouTube(idVideo) {
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${idVideo}`;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+
+    const container = document.getElementById('video-container');
+    container.appendChild(iframe);
+  }
+
+  insertarVideoYouTube('IB0cAmqa3dw'); // ID del video de YouTube
+</script>
+<footer>
+    <img src="imgs/multisp.png" alt="Tu Logo" class="logo" />
+    <div class="social-icons">
+      <a href="#"><img src="imgs/Instagram.webp" alt="Instagram" /></a>
+      <a href="#"><img src="imgs/face.webp" alt="Facebook" /></a>
+      <a href="#"><img src="imgs/WhatsApp.svg.webp" alt="WhatsApp" /></a>
+    </div>
+    <div class="divider"></div>
+    <div class="legal">
+      © 2025 MultiSport | Todos los derechos reservados | Dirección:
+       Zacatecoluca, El Salvador | NIT: 0000-000000-000-0
+    </div>
+  </footer>
+  <script>
+    function toggleMenu() {
+      const menuBtn = document.getElementById('menuBtn');
+      const sidebar = document.getElementById('sidebar');
+      const body = document.body;
+      menuBtn.classList.toggle('active');
+      sidebar.classList.toggle('active');
+      body.classList.toggle('menu-open');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda Deportiva</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .navbar {
+      background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .navbar:hover {
+      background: linear-gradient(90deg, #1f2937, #4b5563);
+    }
+    .navbar img {
+      height: 90px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 4px #e4f875);
+      transition: transform 0.3s ease;
+    }
+         .navbar img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px #e4f875);
+    }
+.navbar h1 {
+      margin-left: 10px;
+      font-size: 1.5em;
+    }
+    .container {
+      padding: 20px;
+      flex-grow: 1;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .section {
+      margin: 30px 0;
+    }
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .producto {
+      width: 200px;
+      height: 250px;
+      perspective: 1000px;
+    }
+    .producto.seleccionado {
+      border: 3px solid green;
+      box-shadow: 0 0 10px green;
+      border-radius: 10px;
+    }
+    .card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+    .producto:hover .card {
+      transform: rotateY(180deg);
+    }
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      flex-direction: column;
+    }
+    .front {
+      background-color: #f0f0f0;
+    }
+    .front img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      margin-bottom: 5px;
+    }
+    .back {
+      background-color: #e0e0e0;
+      transform: rotateY(180deg);
+    }
+    .botones {
+      margin-top: 10px;
+    }
+    .botones button {
+      margin: 5px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .agregar {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .eliminar {
+      background-color: #f44336;
+      color: white;
+    }
+    #total {
+      text-align: center;
+      font-size: 1.2em;
+      margin-top: 40px;
+    }
+    #pagar {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    #pagar button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #pagar button:hover {
+      background-color: #007B9E;
+    }
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown > button {
+      background: none;
+      border: none;
+      color: black;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1em;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      color: black;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      z-index: 10;
+      top: 100%;
+      left: 0;
+    }
+    .dropdown-content a {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+    }
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+     h2 {
+      width: 100%;
+      height: 200px;
+      background-color: black; /* Fondo negro */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .logo-nike {
+      height: 80px;
+      filter: brightness(0) invert(1); /* Asegura que el logo se vea blanco si es oscuro */
+    }
+   footer {
+      background: linear-gradient(90deg, #0d1117 0%, #161b22 100%);
+      color: #bbb;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 0 6px #ffea00);
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter: drop-shadow(0 0 15px #fff266);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: brightness(0) invert(1); /* blanco para resaltar en fondo negro */
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      filter: drop-shadow(0 0 8px #ffea00);
+    }
+
+    .divider {
+      border-top: 1px solid #ffea00;
+      margin: 20px auto;
+      width: 90%;
+      opacity: 0.6;
+    }
+
+    .legal {
+      font-size: 13px;
+      margin-top: 10px;
+      color: #999900;
+      font-style: italic;
+      user-select: none;
+    }
+    /* Estilos para el botón subir */
+    #btnSubir {
+      position:fixed;
+      right: 20px;
+      bottom: 20px;
+      background-color: #f9fbfc;
+      color: black;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 50%;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      display: none; /* Oculto por defecto */
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    #btnSubir:hover {
+      background-color: #005f73;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="Menu.html"><img src="imgs/multisp.png" alt="Logo" /></a>
+    <div class="dropdown">
+      <button>Marcas ▼</button>
+      <div class="dropdown-content">
+        <a href="nike.html" onclick="mostrarMarca('Nike')">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike logo" style="height:24px; width:auto; margin-right:8px;" />
+          Nike
+        </a>
+        <a href="Jordan.html" onclick="mostrarMarca('Jordan')">
+          <img src="imgs/air-jordan-logo.png" alt="Jordan logo" style="height:50px; width:auto; margin-right:8px;" />
+          Jordan
+        </a>
+        <a href="#" onclick="mostrarMarca('Adidas')">
+          <img src="imgs/adidas.svg" alt="Adidas logo" style="height:50px; width:auto; margin-right:8px;" />
+          Adidas
+        </a>
+        <a href="#" onclick="mostrarMarca('Under Armour')">
+          <img src="imgs/Under_armour_logo.svg" alt="Under logo" style="height:50px; width:auto;" />
+        </a>
+        <a href="#" onclick="mostrarMarca('Fila')">
+          <img src="imgs/fila.svg" alt="fila logo" style="height:50px; width:auto; margin-right:8px;" />
+        </a>
+        <a href="#jordan" onclick="mostrarMarca('New Balance')">
+          <img src="imgs/new-balance-2-logo-black-and-white.png" alt="New Balance logo" style="height:80px; width:auto; margin-right:8px;" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <h2>    <img class="logo-nike" src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike Logo"></h2>
+      <br>
+      <div class="productos" id="futbol"></div>
+    </div>
+
+    <div id="total">
+      Total: $<span id="cuenta">0</span>
+    </div>
+
+    <div id="pagar">
+      <button onclick="location.href='pagos.html'">Pagar</button>
+    </div>
+  </div>
+
+  <footer>
+    <img src="imgs/multisp.png" alt="Tu Logo" class="logo" />
+    <div class="social-icons">
+      <a href="#"><img src="imgs/Instagram.webp" alt="Instagram" /></a>
+      <a href="#"><img src="imgs/face.webp" alt="Facebook" /></a>
+      <a href="#"><img src="imgs/WhatsApp.svg.webp" alt="WhatsApp" /></a>
+    </div>
+    <div class="divider"></div>
+    <div class="legal">
+      © 2025 MultiSport | Todos los derechos reservados | Dirección:Zacatecoluca, El salvador | NIT: 0000-000000-000-0
+    </div>
+
+    <!-- Botón para subir -->
+    <button id="btnSubir" title="Ir arriba" aria-label="Ir arriba">↑</button>
+  </footer>
+
+  <script>
+    const productosFutbol = [
+      { nombre: "Zapatillas", descripcion: "Nike Dunk Low", precio: 200, imagen: "imgs/dunks.png" },
+      { nombre: "Jersey Lakers", descripcion: "Los Angeles Lakers Statement Edition", precio: 250, imagen: "imgs/lakers.png" },
+      { nombre: "Camisa Barcelona", descripcion: "Camisa Barcelona Temp 24/25", precio: 120, imagen: "imgs/barcas.png" },
+      { nombre: "Zapatillas Hustle", descripcion: "Nike Team Hustle D 11", precio: 120, imagen: "imgs/hustles.png" },
+      { nombre: "Guantes de Portero", descripcion: "Con agarre avanzado", precio: 35, imagen: "imgs/guantes.png" },
+      { nombre: "Calcetines Antideslizantes", descripcion: "Agarre Firme", precio: 7, imagen: "imgs/calcetines.png" },
+      { nombre: "Cortez", descripcion: "Nike Cortez Textile", precio: 90, imagen: "imgs/cortes.png" },
+      { nombre: "Golden State Warrios", descripcion: "Golden State Warriors Association Edition 2023/24", precio: 230, imagen: "imgs/GWS.png" },
+      { nombre: "Camiseta Inglaterra", descripcion: "Primera equipación Match Inglaterra 2025 (selección femenina)", precio: 90, imagen: "imgs/ingla.png" },
+      { nombre: "Tacos Nike", descripcion: "Nike Mercurial Vapor 1 RGN SE", precio: 210, imagen: "imgs/mercurial.png" },
+      { nombre: "Air Jordan  4", descripcion: "White Cement", precio: 350, imagen: "imgs/retro.png" }
+    ];
+
+    const contenedor = document.getElementById("futbol");
+    productosFutbol.forEach(producto => {
+      contenedor.innerHTML += `
+        <div class="producto">
+          <div class="card">
+            <div class="front">
+              <img src="${producto.imagen}" alt="${producto.nombre}" />
+              ${producto.nombre}
+            </div>
+            <div class="back">
+              <p>${producto.descripcion}</p>
+              <div class="botones">
+                <button class="agregar" onclick="agregar(${producto.precio}, event)">Agregar ($${producto.precio})</button>
+                <button class="eliminar" onclick="eliminar(${producto.precio}, event)">Eliminar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    let total = 0;
+    function agregar(valor, event) {
+      total += valor;
+      document.getElementById("cuenta").textContent = total;
+      const tarjeta = event.target.closest(".producto");
+      tarjeta.classList.add("seleccionado");
+    }
+
+    function eliminar(valor, event) {
+      total = Math.max(0, total - valor);
+      document.getElementById("cuenta").textContent = total;
+      const tarjeta = event.target.closest(".producto");
+      tarjeta.classList.remove("seleccionado");
+    }
+
+    function mostrarMarca(marca) {
+      alert("Mostrando todos los artículos de la marca: " + marca);
+    }
+
+    // Botón subir al inicio
+    const btnSubir = document.getElementById('btnSubir');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 200) {
+        btnSubir.style.display = 'block';
+      } else {
+        btnSubir.style.display = 'none';
+      }
+    });
+
+    btnSubir.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  <!-- Modal para seleccionar talla -->
+<div id="modalTalla" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+  background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:10000;">
+  <div style="background:#fff; padding:20px; border-radius:8px; max-width:300px; width:90%; text-align:center; position:relative;">
+    <h3>Selecciona la talla</h3>
+    <div id="opcionesTalla" style="margin:15px 0;"></div>
+    <button id="btnConfirmarTalla" style="padding:8px 15px; background:#4CAF50; color:#fff; border:none; border-radius:5px; cursor:pointer;">
+      Confirmar
+    </button>
+    <button id="btnCancelarModal" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:18px; cursor:pointer;">×</button>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('modalTalla');
+  const opcionesTalla = document.getElementById('opcionesTalla');
+  let tallaSeleccionada = null;
+  let precioProducto = 0;
+  let tarjetaActual = null;
+
+  function abrirModal(precio, productoNombre, tarjeta) {
+    precioProducto = precio;
+    tarjetaActual = tarjeta;
+    tallaSeleccionada = null;
+
+    // Definir opciones según si es zapato o camisa (ejemplo básico)
+    let tallas = [];
+    if (/zapatilla|zapato|sneaker|cortez|tacos|hustle|dunk/i.test(productoNombre)) {
+      tallas = ['6', '7', '8', '9', '10', '11', '12'];
+    } else {
+      tallas = ['S', 'M', 'L', 'XL', 'XXL'];
+    }
+
+    // Crear botones de tallas
+    opcionesTalla.innerHTML = '';
+    tallas.forEach(talla => {
+      const btn = document.createElement('button');
+      btn.textContent = talla;
+      btn.style.margin = '5px';
+      btn.style.padding = '5px 10px';
+      btn.style.border = '1px solid #ccc';
+      btn.style.borderRadius = '5px';
+      btn.style.cursor = 'pointer';
+      btn.addEventListener('click', () => {
+        tallaSeleccionada = talla;
+        // Resalta el seleccionado
+        Array.from(opcionesTalla.children).forEach(b => b.style.backgroundColor = '');
+        btn.style.backgroundColor = '#4CAF50';
+        btn.style.color = 'white';
+      });
+      opcionesTalla.appendChild(btn);
+    });
+
+    modal.style.display = 'flex';
+  }
+
+  document.getElementById('btnConfirmarTalla').onclick = () => {
+    if (!tallaSeleccionada) {
+      alert('Por favor, selecciona una talla.');
+      return;
+    }
+    // Agrega el producto al total y marca la tarjeta
+    total += precioProducto;
+    document.getElementById("cuenta").textContent = total;
+    tarjetaActual.classList.add("seleccionado");
+    modal.style.display = 'none';
+  };
+
+  document.getElementById('btnCancelarModal').onclick = () => {
+    modal.style.display = 'none';
+  };
+
+  // Reemplazar función agregar para que abra el modal
+  function agregar(valor, event) {
+    const tarjeta = event.target.closest(".producto");
+    const nombreProducto = tarjeta.querySelector('.front').textContent.trim();
+    abrirModal(valor, nombreProducto, tarjeta);
+  }
+</script>
+
+</body>
+</html>

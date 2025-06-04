@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contacto - MultiSport</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    /* RESET Y BASES */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #121212; /* Un negro más profundo y moderno */
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #eee;
+      overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+.navbar {
+      background: linear-gradient(to left, hsl(240, 3%, 7%), hsl(220, 16%, 96%));
+      color: white;
+      padding: 10px 20px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+
+    .navbar:hover {
+      background: linear-gradient(90deg, #1f2937, #4b5563);
+    }
+
+    .navbar img {
+      height: 90px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 4px #4CAF50);
+      transition: transform 0.3s ease;
+    }
+
+    .navbar img:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 10px #4CAF50);
+    }
+
+    /* CONTENEDOR CENTRAL */
+    .container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 20px;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .container h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px #4CAF50;
+    }
+
+    .container p {
+      font-size: 1.25rem;
+      margin-bottom: 40px;
+      color: #a0a0a0;
+    }
+
+    /* BOTÓN ESTILIZADO */
+    button.contacto {
+      padding: 14px 32px;
+      font-size: 18px;
+      background: linear-gradient(45deg, #4CAF50, #66BB6A);
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 8px 15px rgba(76, 175, 80, 0.4);
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    button.contacto:hover {
+      background: linear-gradient(45deg, #66BB6A, #4CAF50);
+      box-shadow: 0 15px 20px rgba(102, 187, 106, 0.6);
+      transform: translateY(-3px);
+    }
+
+    button.contacto:active {
+      transform: translateY(1px);
+      box-shadow: 0 5px 10px rgba(102, 187, 106, 0.4);
+    }
+
+    /* FOOTER */
+    footer {
+      background: linear-gradient(90deg, #0d1117 0%, #161b22 100%);
+      color: #bbb;
+      padding: 40px 20px 20px 20px;
+      text-align: center;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 0 6px #4CAF50);
+      transition: filter 0.3s ease;
+      cursor: default;
+    }
+
+    .logo:hover {
+      filter: drop-shadow(0 0 15px #81C784);
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+
+    .social-icons img {
+      width: 36px;
+      height: 36px;
+      filter: brightness(0) invert(1); /* blanco para resaltar en fondo negro */
+      cursor: pointer;
+      transition: filter 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      filter: drop-shadow(0 0 8px #4CAF50);
+    }
+
+    .divider {
+      border-top: 1px solid #4CAF50;
+      margin: 20px auto;
+      width: 90%;
+      opacity: 0.6;
+    }
+
+    .legal {
+      font-size: 13px;
+      margin-top: 10px;
+      color: #666;
+      font-style: italic;
+      user-select: none;
+    }
+
+    /* SWEETALERT2 CUSTOM */
+    .swal2-popup {
+      background: #1e1e1e !important;
+      color: #eee !important;
+      font-family: 'Poppins', Arial, sans-serif;
+      box-shadow: 0 0 20px #4caf50;
+    }
+
+    .swal2-title {
+      color: #4caf50 !important;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 1.75rem !important;
+    }
+
+    .swal2-input, .swal2-textarea {
+      background: #333 !important;
+      border: 1.5px solid #4caf50 !important;
+      color: #eee !important;
+      font-weight: 600;
+      font-size: 1rem !important;
+      border-radius: 8px !important;
+      padding: 10px !important;
+      transition: border-color 0.3s ease;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    .swal2-input:focus, .swal2-textarea:focus {
+      border-color: #81c784 !important;
+      outline: none !important;
+      box-shadow: 0 0 8px #81c784 !important;
+    }
+
+    .swal2-confirm {
+      background-color: #4caf50 !important;
+      font-weight: 700 !important;
+      font-size: 1.1rem !important;
+      border-radius: 40px !important;
+      padding: 12px 30px !important;
+      transition: background-color 0.3s ease !important;
+    }
+
+    .swal2-confirm:hover {
+      background-color: #388e3c !important;
+    }
+
+    .swal2-cancel {
+      color: #aaa !important;
+      font-weight: 600 !important;
+      font-size: 1rem !important;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .container h1 {
+        font-size: 2.2rem;
+      }
+      
+      .container p {
+        font-size: 1rem;
+      }
+
+      button.contacto {
+        width: 100%;
+        padding: 16px 0;
+        font-size: 1.2rem;
+      }
+
+      .navbar {
+        padding: 10px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="Menu.html" aria-label="Volver al menú principal"><img src="imgs/multisp.png" alt="Logo MultiSport" /></a>
+  </div>
+
+  <div class="container">
+    <h1>¿Tienes dudas o necesitas ayuda?</h1>
+    <p>Haz clic en el botón para escribirnos</p>
+    <button class="contacto" onclick="abrirFormulario()">Contáctanos</button>
+  </div>
+
+  <footer>
+    <img src="imgs/multisp.png" alt="Tu Logo" class="logo" />
+    <div class="social-icons" role="navigation" aria-label="Redes sociales">
+      <a href="#" aria-label="Instagram"><img src="imgs/Instagram.webp" alt="Instagram" /></a>
+      <a href="#" aria-label="Facebook"><img src="imgs/face.webp" alt="Facebook" /></a>
+      <a href="#" aria-label="WhatsApp"><img src="imgs/WhatsApp.svg.webp" alt="WhatsApp" /></a>
+    </div>
+    <div class="divider"></div>
+    <div class="legal" role="contentinfo">
+      © 2025 MultiSport | Todos los derechos reservados | Dirección: Zacatecoluca, El Salvador | NIT: 0000-000000-000-0
+    </div>
+  </footer>
+
+  <script>
+    function abrirFormulario() {
+      Swal.fire({
+        title: 'Contáctanos',
+        html: `
+          <input type="text" id="nombre" class="swal2-input" placeholder="Tu nombre" aria-label="Nombre">
+          <input type="email" id="email" class="swal2-input" placeholder="Tu correo" aria-label="Correo electrónico">
+          <textarea id="mensaje" class="swal2-textarea" placeholder="Escribe tu mensaje" aria-label="Mensaje"></textarea>
+        `,
+        showCancelButton: true,
+        confirmButtonText: 'Enviar',
+        cancelButtonText: 'Cancelar',
+        focusConfirm: false,
+        preConfirm: () => {
+          const nombre = document.getElementById('nombre').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const mensaje = document.getElementById('mensaje').value.trim();
+
+          if (!nombre || !email || !mensaje) {
+            Swal.showValidationMessage('Todos los campos son obligatorios');
+            return false;
+          }
+          // Validar formato básico de correo
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            Swal.showValidationMessage('Ingresa un correo válido');
+            return false;
+          }
+
+          return { nombre, email, mensaje };
+        }
+      }).then(result => {
+        if (result.isConfirmed) {
+          console.log(result.value);
+          Swal.fire({
+            icon: 'success',
+            title: '¡Mensaje enviado!',
+            text: 'Gracias por contactarnos. Te responderemos pronto.',
+            confirmButtonText: 'Aceptar',
+            background: '#1e1e1e',
+            color: '#eee'
+          });
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
